@@ -1,0 +1,30 @@
+# AWS Configuration
+aws_region = "us-east-1"
+
+# Project Configuration
+project_name = "scalable-vpc-arch-DevOps-Project"
+
+# VPC CIDR Blocks
+bastion_vpc_cidr = "192.168.0.0/16"
+app_vpc_cidr     = "172.32.0.0/16"
+
+# Subnet CIDR Blocks
+bastion_public_subnet_cidrs  = ["192.168.1.0/24", "192.168.2.0/24"]
+bastion_private_subnet_cidrs = ["192.168.10.0/24", "192.168.20.0/24"]
+app_public_subnet_cidrs      = ["172.32.1.0/24", "172.32.2.0/24"]
+app_private_subnet_cidrs     = ["172.32.10.0/24", "172.32.20.0/24"]
+
+# EC2 Configuration
+golden_ami_id   = "ami-0c02fb55956c7d316"  # Replace with your Golden AMI ID
+key_pair_name   = "mydev_key"            # Replace with your key pair name
+
+# Domain Configuration
+domain_name = "example.com"  # Replace with your domain
+
+# Tags
+common_tags = {
+  Project     = "ScalableVPCArchitecture"
+  Environment = "dev"
+  Owner       = "DevOps-Team"
+  ManagedBy   = "Imran"
+}
