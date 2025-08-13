@@ -2,6 +2,7 @@
 locals {
   user_data = base64encode(templatefile("${path.module}/user_data.sh", {
     s3_bucket_name = var.s3_bucket_name
+    ssh_public_key = var.ssh_public_key != "" ? var.ssh_public_key : ""
   }))
 }
 

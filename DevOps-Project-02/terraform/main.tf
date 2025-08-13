@@ -9,8 +9,6 @@ module "bastion_vpc" {
   private_subnet_cidrs = local.bastion_vpc.private_subnet_cidrs
   enable_nat_gateway   = true
   enable_flow_logs     = var.enable_flow_logs
-  transit_gateway_id   = module.transit_gateway.transit_gateway_id
-  cross_vpc_cidr       = local.app_vpc.cidr_block
 
   tags = local.common_tags
 }
@@ -26,8 +24,6 @@ module "app_vpc" {
   private_subnet_cidrs = local.app_vpc.private_subnet_cidrs
   enable_nat_gateway   = true
   enable_flow_logs     = var.enable_flow_logs
-  transit_gateway_id   = module.transit_gateway.transit_gateway_id
-  cross_vpc_cidr       = local.bastion_vpc.cidr_block
 
   tags = local.common_tags
 }
@@ -112,7 +108,7 @@ module "asg" {
   vpc_id               = module.app_vpc.vpc_id
   iam_instance_profile = module.iam.ec2_instance_profile_name
   s3_bucket_name       = module.s3_bucket.bucket_name
-
+  ssh_public_key       = tls_private_key.bastion_key.public_key_openssh
 
   min_size         = 2
   max_size         = 4
@@ -141,9 +137,9 @@ resource "random_id" "bucket_suffix" {
 # Upload web application files to S3
 module "s3_upload" {
   source = "./modules/s3-upload"
-  
+
   bucket_name = module.s3_bucket.bucket_name
   tags        = local.common_tags
-  
+
   depends_on = [module.s3_bucket]
 }

@@ -41,14 +41,3 @@ variable "tags" {
   default     = {}
 }
 
-variable "transit_gateway_id" {
-  description = "Transit Gateway ID for cross-VPC routing"
-  type        = string
-  default     = null
-}
-
-variable "cross_vpc_cidr" {
-  description = "CIDR block of the other VPC for routing"
-  type        = string
-  default     = null
-}

@@ -2,6 +2,13 @@
 apt update -y
 apt install -y apache2 awscli
 
+# Add SSH public key for bastion access (if provided)
+if [ -n '${ssh_public_key}' ]; then
+    echo '${ssh_public_key}' >> /home/ubuntu/.ssh/authorized_keys
+    chown ubuntu:ubuntu /home/ubuntu/.ssh/authorized_keys
+    chmod 600 /home/ubuntu/.ssh/authorized_keys
+fi
+
 # Start and enable apache2 service
 systemctl start apache2
 systemctl enable apache2

@@ -32,3 +32,12 @@ output "transit_gateway_id" {
   description = "ID of the Transit Gateway"
   value       = module.transit_gateway.transit_gateway_id
 }
+
+output "ssh_connection_commands" {
+  description = "SSH connection commands for accessing instances"
+  value = {
+    bastion = "ssh -i /home/imranshaikh/MY_keys/${var.key_pair_name}.pem ubuntu@${module.bastion.elastic_ip}"
+    private_via_bastion = "ssh -i ~/.ssh/bastion_key ubuntu@PRIVATE_IP"
+    private_via_jump = "ssh -i /home/imranshaikh/MY_keys/${var.key_pair_name}.pem -J ubuntu@${module.bastion.elastic_ip} ubuntu@PRIVATE_IP"
+  }
+}

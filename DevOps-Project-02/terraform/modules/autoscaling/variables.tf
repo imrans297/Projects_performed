@@ -45,6 +45,12 @@ variable "s3_bucket_name" {
   type        = string
 }
 
+variable "ssh_public_key" {
+  description = "SSH public key for bastion access"
+  type        = string
+  default     = ""
+}
+
 variable "vpc_id" {
   description = "VPC ID for target group"
   type        = string

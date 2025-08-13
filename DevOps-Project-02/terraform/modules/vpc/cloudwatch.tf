@@ -7,7 +7,7 @@ resource "aws_cloudwatch_log_group" "vpc_flow_logs" {
   tags              = var.tags
   
   lifecycle {
-    ignore_changes = [name]
+    ignore_changes = [retention_in_days, tags]
   }
 }
 

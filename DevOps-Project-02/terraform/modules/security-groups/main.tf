@@ -11,6 +11,14 @@ resource "aws_security_group" "bastion" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
+  ingress {
+    description = "ICMP from App VPC"
+    from_port   = -1
+    to_port     = -1
+    protocol    = "icmp"
+    cidr_blocks = [var.app_vpc_cidr]
+  }
+
   egress {
     from_port   = 0
     to_port     = 0
@@ -33,6 +41,14 @@ resource "aws_security_group" "app" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
+    cidr_blocks = [var.bastion_vpc_cidr]
+  }
+
+  ingress {
+    description = "ICMP from Bastion VPC"
+    from_port   = -1
+    to_port     = -1
+    protocol    = "icmp"
     cidr_blocks = [var.bastion_vpc_cidr]
   }
 

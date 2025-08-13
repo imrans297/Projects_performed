@@ -114,23 +114,7 @@ resource "aws_route_table" "private" {
   })
 }
 
-# Route to Transit Gateway for cross-VPC communication (private subnets)
-resource "aws_route" "private_to_tgw" {
-  count = var.transit_gateway_id != null ? length(aws_route_table.private) : 0
-  
-  route_table_id         = aws_route_table.private[count.index].id
-  destination_cidr_block = var.cross_vpc_cidr
-  transit_gateway_id     = var.transit_gateway_id
-}
 
-# Route to Transit Gateway for cross-VPC communication (public subnets)
-resource "aws_route" "public_to_tgw" {
-  count = var.transit_gateway_id != null ? 1 : 0
-  
-  route_table_id         = aws_route_table.public.id
-  destination_cidr_block = var.cross_vpc_cidr
-  transit_gateway_id     = var.transit_gateway_id
-}
 
 # Route Table Associations for Private Subnets
 resource "aws_route_table_association" "private" {
