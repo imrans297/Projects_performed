@@ -1,0 +1,57 @@
+# Terraform
+*.tfstate
+*.tfstate.*
+*.tfvars
+.terraform/
+.terraform.lock.hcl
+terraform.tfplan
+terraform.tfplan.*
+
+# AWS
+*.pem
+*.key
+.aws/
+
+# Java/Maven
+target/
+*.class
+*.jar
+*.war
+*.ear
+*.logs
+*.log
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Secrets
+secret.yaml
+secrets/
+*.secret
+
+# Build artifacts
+*.tgz
+*.tar.gz
+dist/
+build/
+
+# Logs
+logs/
+*.log
+
+# Temporary files
+tmp/
+temp/
